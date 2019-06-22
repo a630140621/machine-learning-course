@@ -24,7 +24,7 @@ def randomGenData():
     D_X = pd.DataFrame(X, columns=["p1", "p2"])
     # 添加更多的featured, 在添加这些featured之前, 直接使用逻辑回归模型效果很差
     D_X["p1*p1"] = D_X["p1"] ** 2
-    D_X["p1*p2"] = D_X["p1"] * D_X["p2"]
+    # D_X["p1*p2"] = D_X["p1"] * D_X["p2"]
     D_X["p2*p2"] = D_X["p2"] ** 2
     return D_X
 
@@ -39,8 +39,9 @@ X_train = data.iloc[:, 0: 2]
 y_train = data.iloc[:, 2]
 
 # 添加更多的featured, 在添加这些featured之前, 直接使用逻辑回归模型效果很差
+# 下述两个featured 去除一个将会得到完全不同的图像, 请自行尝试(very interesting)
 X_train["p1*p1"] = X_train["p1"] ** 2
-X_train["p1*p2"] = X_train["p1"] * X_train["p2"]
+# X_train["p1*p2"] = X_train["p1"] * X_train["p2"]
 X_train["p2*p2"] = X_train["p2"] ** 2
 
 print(X_train.shape, y_train.shape)
