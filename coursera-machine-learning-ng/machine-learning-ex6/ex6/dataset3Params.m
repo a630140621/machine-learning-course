@@ -24,9 +24,24 @@ sigma = 0.3;
 %
 
 
+CTest = [0.01 0.03 0.1 0.3 1 3 10 30];
+sigmaTest = [0.01 0.03 0.1 0.3 1,3 10 30];
+errors = zeros(length(CTest),length(sigmaTest));
 
+for i = 1:length(CTest)
+    for j = 1:length(sigmaTest)
+        model= svmTrain(X, y, CTest(i), @(x1, x2) gaussianKernel(x1, x2, sigmaTest(j)));
+        predictions = svmPredict(model, Xval);
+        errors(i,j) = mean(double(predictions ~= yval));
+        clear model;
+        clear predictions;
+    end
+end
 
-
+[dummy,ind] = min(errors(:));
+[i,j] = ind2sub([size(errors,1) size(errors,2)],ind);
+C = CTest(i);
+sigma = sigmaTest(j);
 
 
 % =========================================================================

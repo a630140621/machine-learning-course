@@ -16,8 +16,8 @@ sim = 0;
 %
 %
 
-
-
+temp = (x1-x2)'*(x1-x2);
+sim = exp(-temp/(2*(sigma^2)));
 
 
 
