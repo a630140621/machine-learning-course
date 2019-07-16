@@ -43,12 +43,12 @@ Theta_grad = zeros(size(Theta));
 
 
 
+term = X*Theta'.*R-Y.*R;
+J = (term(:)'*term(:)+lambda*Theta(:)'*Theta(:)+lambda*X(:)'*X(:))/2;
 
 
-
-
-
-
+X_grad = term*Theta+lambda*X;
+Theta_grad = term'*X+lambda*Theta;
 
 
 
